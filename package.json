@@ -1,0 +1,12 @@
+{
+  "name": "wp-comoquiero",
+  "scripts": {
+    "del": "ssh bitnami@34.235.171.208 -i ../../LightsailDefaultKey-us-east-1.pem 'sudo rm -rf ~/stack/wordpress/wp-content/plugins/comoquiero/*'",
+    "copy": "npm run del && scp -i ../../LightsailDefaultKey-us-east-1.pem -r * bitnami@34.235.171.208:~/stack/wordpress/wp-content/plugins/comoquiero",
+    "commit": "git add . && git commit -a -m 'deploy `date +%y.%m.%d%H%M`'",
+    "tag": "git tag -a $(date +%y.%m.%d%H%M) -m 'version $(date +%y.%m.%d%H%M)' || true",
+    "deploy": "npm run commit && npm run tag && bash deploy.sh"
+  },
+  "dependencies": {
+  }
+}
